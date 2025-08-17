@@ -1,0 +1,37 @@
+package catalog
+
+import (
+	"github.com/kongweiguo/spire-tenant/pkg/common/catalog"
+
+	"github.com/kongweiguo/spire-tenant/pkg/agent/plugin/keymanager"
+	"github.com/kongweiguo/spire-tenant/pkg/agent/plugin/keymanager/disk"
+	"github.com/kongweiguo/spire-tenant/pkg/agent/plugin/keymanager/memory"
+)
+
+type keyManagerRepository struct {
+	keymanager.Repository
+}
+
+func (repo *keyManagerRepository) Binder() any {
+	return repo.SetKeyManager
+}
+
+func (repo *keyManagerRepository) Constraints() catalog.Constraints {
+	return catalog.ExactlyOne()
+}
+
+func (repo *keyManagerRepository) Versions() []catalog.Version {
+	return []catalog.Version{keyManagerV1{}}
+}
+
+func (repo *keyManagerRepository) BuiltIns() []catalog.BuiltIn {
+	return []catalog.BuiltIn{
+		disk.BuiltIn(),
+		memory.BuiltIn(),
+	}
+}
+
+type keyManagerV1 struct{}
+
+func (keyManagerV1) New() catalog.Facade { return new(keymanager.V1) }
+func (keyManagerV1) Deprecated() bool    { return false }
