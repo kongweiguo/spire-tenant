@@ -65,7 +65,7 @@ require (
 	github.com/jinzhu/gorm v1.9.16
 	github.com/kongweiguo/spire-api-sdk-tenant v0.0.0-20250815150819-2b09bc80f657
 	github.com/lib/pq v1.10.9
-	github.com/mattn/go-sqlite3 v1.14.30
+	github.com/mattn/go-sqlite3 v1.14.32
 	github.com/mitchellh/cli v1.1.5
 	github.com/open-policy-agent/opa v1.7.1
 	github.com/prometheus/client_golang v1.23.0
